@@ -8,10 +8,9 @@ import org.apache.flink.core.fs.Path;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.filesystem.bucketassigners.BasePathBucketAssigner;
-import org.apache.flink.streaming.util.serialization.SimpleStringSchema;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
 
 import java.time.LocalDateTime;
-import java.util.Properties;
 
 public class FlinkConsumer {
 
@@ -25,15 +24,9 @@ public class FlinkConsumer {
                 .setBootstrapServers("localhost:9092")
                 .setTopics("100ktopic")
                 .setGroupId("my-group")
-                .setStartingOffsets(OffsetsInitializer.earliest())
                 .setValueOnlyDeserializer(new SimpleStringSchema())
                 .setStartingOffsets(OffsetsInitializer.latest())
                 .build();
-
-        // Create a properties object to connect with Kafka
-        Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "localhost:9092");
-        properties.setProperty("group.id", "myGroup");
 
         // Create DataStream of Strings that will be delivered from Kafka and add timestamp using
         // map-Function

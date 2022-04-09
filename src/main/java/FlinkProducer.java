@@ -1,6 +1,5 @@
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
-import org.apache.flink.connector.base.DeliveryGuarantee;
 import org.apache.flink.connector.file.src.FileSource;
 import org.apache.flink.connector.file.src.reader.TextLineFormat;
 import org.apache.flink.connector.kafka.sink.KafkaRecordSerializationSchema;
